@@ -7,6 +7,9 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
+#include <sys/wait.h>
+#include <string.h>
 
 #include "variante.h"
 #include "readcmd.h"
@@ -17,10 +20,9 @@
 
 int main() {
         printf("Variante %d: %s\n", VARIANTE, VARIANTE_STRING);
-
 	while (1) {
 		struct cmdline *l;
-		int i, j;
+		//int i, j;
 		char *prompt = "ensishell>";
 
 		l = readcmd(prompt);
@@ -42,13 +44,40 @@ int main() {
 		if (l->bg) printf("background (&)\n");
 
 		/* Display each command of the pipe */
-		for (i=0; l->seq[i]!=0; i++) {
+		/*for (i=0; l->seq[i]!=0; i++) {
 			char **cmd = l->seq[i];
 			printf("seq[%d]: ", i);
                         for (j=0; cmd[j]!=0; j++) {
                                 printf("'%s' ", cmd[j]);
                         }
 			printf("\n");
+			}*/
+		/*exec*/
+		int res;
+		int status;
+		
+	
+		if((res=fork())==0){
+		  execvp(l->seq[0][0],l->seq[0]);
+		
+		  //printf("%s %d \n",l->seq[0][0], getpid());
 		}
+		else{
+		  if(!strcmp(l->seq[0][0], "jobs")){
+		    /*  char str[50] = "ps -o pid,cmd --ppid ";
+		    char ppid [7];
+		    sprintf(ppid,"%d",getpid());
+		    strcat(str,ppid);
+		    system(str);*/
+		  }
+	 
+		  if(!l->bg)
+		  waitpid(res, &status, 0);
+		  
+		}
+		  
+
+		
+		
 	}
 }
