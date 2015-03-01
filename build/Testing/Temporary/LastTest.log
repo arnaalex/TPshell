@@ -1,0 +1,49 @@
+Start testing: Feb 13 15:13 CET
+----------------------------------------------------------
+1/1 Testing: UnitShellTests
+1/1 Test: UnitShellTests
+Command: "/user/4/.base/brazousd/home/TPshell/tests/allShellTests.rb"
+Directory: /user/4/.base/brazousd/home/TPshell/build
+"UnitShellTests" start time: Feb 13 15:13 CET
+Output:
+----------------------------------------------------------
+Loaded suite /user/4/.base/brazousd/home/TPshell/tests/allShellTests
+Started
+.....FFFFF
+Finished in 5.411299 seconds.
+
+  1) Failure:
+test_inout(Test2InOut) [../tests/testInOut.rb:27]:
+sortie incohérente pour ls -l.
+<nil> expected to not be nil.
+
+  2) Failure:
+test_inoutpipe(Test2InOut) [../tests/testInOut.rb:50]:
+cat titiExpect.txt titiExpect.txt n'a pas rendu deux fois le même entier à la suite.
+<nil> expected to not be nil.
+
+  3) Failure:
+test_parallelisme(Test2InOut) [../tests/testInOut.rb:63]:
+le | ne semble pas parallèle.
+<nil> expected to not be nil.
+
+  4) Failure:
+test_pipe(Test2InOut) [../tests/testInOut.rb:42]:
+sortie incohérente pour ls | wc -l.
+<nil> expected to not be nil.
+
+  5) Failure:
+test_inout(Test3Jobs) [../tests/testJobs.rb:27]:
+jobs n'affiche pas le nom de la commande sleep.
+<nil> expected to not be nil.
+
+10 tests, 12 assertions, 5 failures, 0 errors
+<end of output>
+Test time =   5.65 sec
+----------------------------------------------------------
+Test Failed.
+"UnitShellTests" end time: Feb 13 15:13 CET
+"UnitShellTests" time elapsed: 00:00:05
+----------------------------------------------------------
+
+End testing: Feb 13 15:13 CET
