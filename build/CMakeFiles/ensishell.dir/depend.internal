@@ -3,8 +3,12 @@
 
 CMakeFiles/ensishell.dir/src/ensishell.c.o
  /user/4/.base/brazousd/home/TPshell/src/ensishell.c
+ /user/4/.base/brazousd/home/TPshell/src/list.h
  /user/4/.base/brazousd/home/TPshell/src/readcmd.h
  /user/4/.base/brazousd/home/TPshell/src/variante.h
+CMakeFiles/ensishell.dir/src/list.c.o
+ /user/4/.base/brazousd/home/TPshell/src/list.c
+ /user/4/.base/brazousd/home/TPshell/src/list.h
 CMakeFiles/ensishell.dir/src/readcmd.c.o
  /user/4/.base/brazousd/home/TPshell/src/readcmd.c
  /user/4/.base/brazousd/home/TPshell/src/readcmd.h

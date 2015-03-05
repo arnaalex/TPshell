@@ -13,6 +13,7 @@
 
 #include "variante.h"
 #include "readcmd.h"
+#include "list.h"
 
 #ifndef VARIANTE
 #error "Variante non défini !!"
@@ -24,6 +25,7 @@ int main() {
 		struct cmdline *l;
 		//int i, j;
 		char *prompt = "ensishell>";
+		list li;
 
 		l = readcmd(prompt);
 
@@ -55,29 +57,25 @@ int main() {
 		/*exec*/
 		int res;
 		int status;
-		
-	
-		if((res=fork())==0){
-		  execvp(l->seq[0][0],l->seq[0]);
-		
-		  //printf("%s %d \n",l->seq[0][0], getpid());
-		}
-		else{
-		  if(!strcmp(l->seq[0][0], "jobs")){
-		    /*  char str[50] = "ps -o pid,cmd --ppid ";
-		    char ppid [7];
-		    sprintf(ppid,"%d",getpid());
-		    strcat(str,ppid);
-		    system(str);*/
-		  }
-	 
-		  if(!l->bg)
-		  waitpid(res, &status, 0);
-		  
-		}
-		  
 
-		
-		
+		 if(!strcmp(l->seq[0][0], "jobs")){
+		   delete_terminated(&li);
+		  }
+		 else{
+		   if((res=fork())==0){
+		    
+		     execvp(l->seq[0][0],l->seq[0]);
+		    
+		     //printf("%s %d \n",l->seq[0][0], getpid());
+		   }
+		   else{
+		     if(!l->bg)
+			waitpid(res, &status, 0);
+		     else
+		        add_processus(&li, getpid(), l->seq[0][0]);
+		   }
+		}
+		 		
+   
 	}
 }

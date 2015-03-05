@@ -6,23 +6,17 @@
 
 #IncludeRegexTransform: 
 
-/user/4/.base/brazousd/home/TPshell/src/ensishell.c
+/user/4/.base/brazousd/home/TPshell/src/list.c
+list.h
+/user/4/.base/brazousd/home/TPshell/src/list.h
+
+/user/4/.base/brazousd/home/TPshell/src/list.h
 stdio.h
 -
 stdlib.h
 -
-unistd.h
+sys/types.h
 -
 sys/wait.h
 -
-string.h
--
-variante.h
-/user/4/.base/brazousd/home/TPshell/src/variante.h
-readcmd.h
-/user/4/.base/brazousd/home/TPshell/src/readcmd.h
-
-/user/4/.base/brazousd/home/TPshell/src/readcmd.h
-
-/user/4/.base/brazousd/home/TPshell/src/variante.h
 

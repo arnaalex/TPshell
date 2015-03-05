@@ -1,6 +1,7 @@
 FILE(REMOVE_RECURSE
   "CMakeFiles/ensishell.dir/src/readcmd.c.o"
   "CMakeFiles/ensishell.dir/src/ensishell.c.o"
+  "CMakeFiles/ensishell.dir/src/list.c.o"
   "ensishell.pdb"
   "ensishell"
 )
