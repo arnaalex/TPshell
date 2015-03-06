@@ -1,17 +1,19 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
  #include <sys/types.h>
  #include <sys/wait.h>
 
-typedef struct processus processus;
+
 
 struct processus{
 	int pid;
 	char* commande;
-	processus* next;
+	struct processus* next;
 
 };
 
+typedef struct processus processus;
 typedef processus* list;
 
 void add_processus(list* l, int pid, char* commande);

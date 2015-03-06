@@ -21,11 +21,12 @@
 
 int main() {
         printf("Variante %d: %s\n", VARIANTE, VARIANTE_STRING);
+	list li = NULL;
+
 	while (1) {
 		struct cmdline *l;
 		//int i, j;
 		char *prompt = "ensishell>";
-		list li;
 
 		l = readcmd(prompt);
 
@@ -45,7 +46,7 @@ int main() {
 		if (l->out) printf("out: %s\n", l->out);
 		if (l->bg) printf("background (&)\n");
 
-		/* Display each command of the pipe */
+			/* Display each command of the pipe */
 		/*for (i=0; l->seq[i]!=0; i++) {
 			char **cmd = l->seq[i];
 			printf("seq[%d]: ", i);
@@ -53,29 +54,33 @@ int main() {
                                 printf("'%s' ", cmd[j]);
                         }
 			printf("\n");
-			}*/
+			}
+		*/
+
 		/*exec*/
 		int res;
 		int status;
 
-		 if(!strcmp(l->seq[0][0], "jobs")){
-		   delete_terminated(&li);
-		  }
-		 else{
+		int jobs = !strcmp(l->seq[0][0], "jobs");
+		 
+		if(jobs){
+		        delete_terminated(&li);
+		}
+		else{
+		 
 		   if((res=fork())==0){
-		    
 		     execvp(l->seq[0][0],l->seq[0]);
-		    
-		     //printf("%s %d \n",l->seq[0][0], getpid());
 		   }
 		   else{
+		     
 		     if(!l->bg)
 			waitpid(res, &status, 0);
 		     else
-		        add_processus(&li, getpid(), l->seq[0][0]);
+		         add_processus(&li, res, l->seq[0][0]);
+		      
+		     
 		   }
-		}
 		 		
-   
+		}
 	}
 }
