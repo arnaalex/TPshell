@@ -60,14 +60,49 @@ int main() {
 		/*exec*/
 		int res;
 		int status;
+		 if (l->in!=NULL) {
+            char* name = l->in;
+            int file = open(name, O_RDWR, NULL);
+            if (file==-1) {
+                printf("ne peut pas ouvrir le fichier \"%s\" (%s)\n",name,strerror(errno));
+                exit(1);
+            }
+            dup2(file,0);
+            execvp(l->seq[0][0],l->seq[0]);
+            close(file);
+        }
 
+
+        if (l->out!=NULL) {
+            /* On récupère le nom de fichier de sortie */
+            char* name = l->out;
+            /* On ouvre le fichier destination */
+            mode_t mode = S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH;
+            int file = open(name, O_RDWR | O_CREAT, mode);
+            if (file==-1) { 
+                printf("ne peut pas créer le fichier \"%s\" (%s)\n",name,strerror(errno));
+                exit(1);
+            }   
+
+            /* On redirige la sortie standard sur file */
+            dup2(file,1);
+            /* On exécute la commande */
+            execvp(l->seq[0][0],l->seq[0]);
+            close(file);
+        }
 		int jobs = !strcmp(l->seq[0][0], "jobs");
 		 
 		if(jobs){
 		        delete_terminated(&li);
 		}
 		else{
-		 
+		  if(!strcmp(l->seq[0][0], "jobs")){
+                /*  char str[50] = "ps -o pid,cmd --ppid ";
+                    char ppid [7];
+                    sprintf(ppid,"%d",getpid());
+                    strcat(str,ppid);
+                    system(str);*/
+            }
 		   if((res=fork())==0){
 		     execvp(l->seq[0][0],l->seq[0]);
 		   }
